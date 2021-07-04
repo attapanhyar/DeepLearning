@@ -1,0 +1,23 @@
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
+import os
+chatbot = ChatBot('Ron Obvious')
+
+# Create a new trainer for the chatbot
+trainer = ChatterBotCorpusTrainer(chatbot)
+
+# Train the chatbot based on the english corpus
+#trainer.train("chatterbot.corpus.english")
+for files in os.listdir('C:/Windows/System32/Python/chatterbot_corpus/data/english/'):
+    data = open('C:/Windows/System32/Python/chatterbot_corpus/data/english/'+files,'r').readlines()
+    trainer = chatbot.train(data)
+        
+while True:
+    message = input('You:')
+    if message.strip() != 'Bye':
+        
+        reply = chatbot.get_response('message')
+        print ('Chatbot: ', reply)
+        if message.strip == 'Bye':
+            print('Chatbot: Bye')
+            break
